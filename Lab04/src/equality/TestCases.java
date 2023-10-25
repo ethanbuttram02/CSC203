@@ -25,7 +25,7 @@ public class TestCases
       assertTrue(two.equals(one));
    }
 
-   @Test
+   @org.junit.jupiter.api.Test
    public void testExercise2()
    {
       final CourseSection one = new CourseSection("CSC", "203", 35,
