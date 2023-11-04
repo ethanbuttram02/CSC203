@@ -1,11 +1,14 @@
 package calculator;
 
-class AddExpression
+public class AddExpression
    extends BinaryExpression
 {
+   public AddExpression(Expression lft, Expression rht, String operation) {
+      super(lft, rht, "+");
+   }
 
    @Override
-   double _applyOperator() {
-      evaluate();
+   public double _applyOperator(double leftVal, double rightVal) {
+      return leftVal + rightVal;
    }
 }

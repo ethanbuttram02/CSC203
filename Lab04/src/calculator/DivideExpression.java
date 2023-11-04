@@ -19,6 +19,7 @@ class DivideExpression
 
    public double evaluate(final Bindings bindings)
    {
+
       return lft.evaluate(bindings) / rht.evaluate(bindings);
    }
 }

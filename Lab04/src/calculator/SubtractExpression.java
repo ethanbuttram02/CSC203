@@ -1,12 +1,15 @@
 package calculator;
 
-class SubtractExpression
+public class SubtractExpression
    extends BinaryExpression
    {
+   public SubtractExpression(Expression lft, Expression rht, String operation) {
+      super(lft, rht, "-");
+   }
 
    @Override
-   double _applyOperator() {
-
+   public double _applyOperator(double leftVal, double rightVal) {
+      return leftVal - rightVal;
    }
 }
 

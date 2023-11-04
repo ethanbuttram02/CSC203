@@ -20,5 +20,23 @@ class CourseSection
       this.endTime = endTime;
    }
 
+   public boolean equals(Object other) {
+      CourseSection o = (CourseSection)other;
+
+      return this.prefix.equals(o.prefix) && this.number.equals(o.number) && this.enrollment == o.enrollment && this.startTime.equals(o.startTime) && this.endTime.equals(o.startTime);
+   }
+
+   public int hashCode() {
+      int result = 17; // Start with a non-zero constant
+
+      // Combine the hash code of each field
+      result = 31 * result + prefix.hashCode();
+      result = 31 * result + number.hashCode();
+      result = 31 * result + enrollment;
+      result = 31 * result + startTime.hashCode();
+      result = 31 * result + endTime.hashCode();
+
+      return result;
+   }
    // additional likely methods not defined since they are not needed for testing
 }
