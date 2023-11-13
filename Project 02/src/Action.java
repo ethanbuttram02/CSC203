@@ -1,53 +1,17 @@
 /**
  * An action that can be taken by an entity
  */
-public final class Action {
-    private ActionKind kind;
-    private Entity entity;
-    private WorldModel world;
-    private ImageStore imageStore;
-    private int repeatCount;
+public interface Action {
 
-    public Action(ActionKind kind, Entity entity, WorldModel world, ImageStore imageStore, int repeatCount) {
-        this.kind = kind;
-        this.entity = entity;
-        this.world = world;
-        this.imageStore = imageStore;
-        this.repeatCount = repeatCount;
-    }
+    Action createAnimationAction(Entity entity, int repeatCount);
 
-    public static Action createAnimationAction(Entity entity, int repeatCount) {
-        return new Action(ActionKind.ANIMATION, entity, null, null, repeatCount);
-    }
+    Action createActivityAction(Entity entity, WorldModel world, ImageStore imageStore);
 
-    public static Action createActivityAction(Entity entity, WorldModel world, ImageStore imageStore) {
-        return new Action(ActionKind.ACTIVITY, entity, world, imageStore, 0);
-    }
+    void executeAction(EventScheduler scheduler);
 
-    public void executeAction(EventScheduler scheduler) {
-        switch (this.kind) {
-            case ACTIVITY:
-                this.executeActivityAction(scheduler);
-                break;
+    void executeAnimationAction(EventScheduler scheduler);
 
-            case ANIMATION:
-                this.executeAnimationAction(scheduler);
-                break;
-        }
-    }
-
-    public void executeAnimationAction(EventScheduler scheduler) {
-        this.entity.nextImage();
-
-        if (this.repeatCount != 1) {
-            scheduler.scheduleEvent(this.entity,
-                    createAnimationAction(this.entity,
-                            Math.max(this.repeatCount - 1, 0)),
-                    this.entity.getAnimationPeriod());
-        }
-    }
-
-    public void executeActivityAction(EventScheduler scheduler) {
+    void executeActivityAction(EventScheduler scheduler); /*{
         switch (this.entity.getKind()) {
             case SAPLING:
                 this.entity.executeSaplingActivity(this.world, this.imageStore, scheduler);
@@ -68,5 +32,5 @@ public final class Action {
                 throw new UnsupportedOperationException(String.format("executeActivityAction not supported for %s",
                         this.entity.getKind()));
         }
-    }
+    }*/
 }

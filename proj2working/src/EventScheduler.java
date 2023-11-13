@@ -28,7 +28,7 @@ public final class EventScheduler {
             Event next = this.eventQueue.poll();
             removePendingEvent( next);
             this.currentTime = next.time();
-            next.action().executeAction(this);
+            next.action().executeAction( this);
         }
         this.currentTime = stopTime;
     }
@@ -43,7 +43,7 @@ public final class EventScheduler {
         }
     }
 
-    public void scheduleEvent(Entity entity, Object action, double afterPeriod) {
+    public void scheduleEvent(Entity entity, Action action, double afterPeriod) {
         double time = this.currentTime + afterPeriod;
 
         Event event = new Event(action, time, entity);

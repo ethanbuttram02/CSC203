@@ -73,11 +73,11 @@ public final class WorldModel {
         scheduler.unscheduleAllEvents(entity);
         this.removeEntityAt(entity.getPosition());
     }
-    public Optional<Entity> findNearest(Point pos, ArrayList<Entity> kinds) {
+    public Optional<Entity> findNearest(Point pos, List<EntityKind> kinds) {
         List<Entity> ofType = new LinkedList<>();
-        for (Entity kind : kinds) {
+        for (EntityKind kind : kinds) {
             for (Entity entity : this.entities) {
-                if (entity.kind == kind) {
+                if (entity.getKind() == kind) {
                     ofType.add(entity);
                 }
             }
